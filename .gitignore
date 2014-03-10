@@ -1,3 +1,10 @@
+# Directories
+src/
+History/
+
+#excuted file
+test
+
 # Compiled Object files
 *.slo
 *.lo

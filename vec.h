@@ -290,7 +290,7 @@ Vec<T>& Vec<T>::operator*=(T v)
 {
     for (int i=0; i< i_Size; i++)
     {
-        (*this)[i]+=v;
+        (*this)[i]*=v;
     }
     return *this;
 }

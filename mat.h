@@ -35,6 +35,20 @@ public:
         assert(r>0&&r<=i_Row&&c>0&&c<=i_Col);
         return vec_M[(c-1)*i_Row+(r-1)];
     }
+
+    Mat& operator*=(Type v) 
+    {
+        this->vec_M*=v;
+        return *this;
+    }
+
+    Mat operator*(Type v) const
+    {
+        Mat<Type> temp(this->vec_M*=v);
+        return temp;
+    }
+
+
 };
 
 
@@ -110,18 +124,21 @@ void Mat<Type>::randMat(int R, int C)
 template <typename Type>
 void Mat<Type>::Trans()
 {
+    Mat<Type> temp(i_Col,i_Row);
     for(int i=1; i<=i_Col; i++)
     {
-        for(int j=i+1;j<=i_Row;j++)
+        for(int j=1;j<=i_Row;j++)
         {
-            Type temp=(*this)(j,i);
-            (*this)(j,i)=(*this)(i,j);
-            (*this)(i,j)=temp;
+            //Type temp=(*this)(i,j);
+            //(*this)(i,j)=(*this)(j,i);
+            //(*this)(j,i)=temp;
+            temp(i,j)=(*this)(j,i);
             //vec_M.swap(i*i_Row+j, j*i_Row+i);
         }
     }
+    *this = temp;
 }
 
-
+#include "mat.cpp"
 #endif
 

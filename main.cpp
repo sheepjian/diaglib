@@ -6,10 +6,22 @@ using namespace std;
 
 typedef complex<double> dcomp;
 
-int main()
+template <typename T>
+void mat_timer(Mat<T> &M)
 {
     double tstart, tstop, ttime;
-    /*
+    tstart=(double)clock()/CLOCKS_PER_SEC;
+    //start point
+    M.Trans();
+    //stop point
+    tstop=(double)clock()/CLOCKS_PER_SEC;
+    ttime = tstop- tstart;
+    cout<<"the cost time is "<<ttime<<"sec"<<endl;
+}
+
+int main()
+{
+    
     complex<double> e(1.0,2.0);
     complex<double> f(1.0,-2.0);
     dcomp g(3);
@@ -20,18 +32,20 @@ int main()
     comVec[2]=g;
     comVec[3]=h;
     comVec.Print();
+    comVec= comVec*5;
+    comVec.Print();
     dcomp resCom = comVec.Norm();
     cout<<"the complex norm is"<<std::abs(resCom)<<endl;
-    */
+    
 
-    Mat<int> testMat;
-    testMat.randMat(2000,2000);
-    //testMat.showMat();
-    tstart=(double)clock()/CLOCKS_PER_SEC;
-    testMat.Trans();
-    tstop=(double)clock()/CLOCKS_PER_SEC;
-    ttime = tstop- tstart;
-    cout<<"the cost time is "<<ttime<<"sec"<<endl;
+    Mat<int> testMat, anotherMat;
+    testMat.randMat(5,5);
+    anotherMat.randMat(5,5);
+    testMat.showMat();
+    //anotherMat.showMat();
+    anotherMat = 2*testMat;
+    anotherMat.showMat();
+    mat_timer<int>(testMat);
     //testMat.showMat();
     /*
     testMat(1,1)=0;
